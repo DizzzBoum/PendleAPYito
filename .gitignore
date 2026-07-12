@@ -1,0 +1,32 @@
+# Secrets et configuration locale
+.env
+
+# Environnement virtuel Python
+.venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Données locales (cache / travail) — le dossier data/ reste versionné
+# grâce à data/.gitkeep, mais pas son contenu généré à l'exécution
+data/markets.json
+data/markets_raw.json
+data/orders.json
+data/portfolio.json
+
+# Logs de transactions
+tx_logs/
+
+# IDE
+.idea/
+
+# Packaging Python
+*.egg-info/
+dist/
+build/
+.claude/
+ANALYSE_PendleAPYito_ClaudeCode.md
+.claude/
+ANALYSE_PendleAPYito_ClaudeCode.md
+*.py~
