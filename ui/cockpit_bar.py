@@ -84,6 +84,25 @@ def _fmt_price(v: Optional[float]) -> Optional[str]:
 # ============================================================
 # Styles locaux (extension du thème AnyLiqBot sans modifier _theme.py)
 # ============================================================
+# new_str
+@st.cache_data(ttl=3600)
+def _check_latest_version() -> Optional[str]:
+    """Vérifie la dernière version disponible sur GitHub Releases.
+
+    Caché 1h — un seul appel GitHub par heure maximum.
+    Retourne la version string (ex: "0.2.0") ou None si échec.
+    """
+    try:
+        import urllib.request, json
+        url = "https://api.github.com/repos/DizzzBoum/PendleAPYito/releases/latest"
+        req = urllib.request.Request(url, headers={"User-Agent": "PendleAPYito"})
+        with urllib.request.urlopen(req, timeout=3) as r:
+            data = json.loads(r.read())
+            tag = data.get("tag_name", "")
+            return tag.lstrip("v") if tag else None
+    except Exception:
+        return None
+
 
 def _inject_local_styles() -> None:
     """Ajoute une classe .is-ok verte au vocabulaire de chips existant,
@@ -241,6 +260,34 @@ def render_cockpit_bar() -> None:
         return
 
     _inject_local_styles()
+
+    # Bandeau mise à jour — vérifie GitHub Releases 1x/heure
+    try:
+        from version import __version__
+        latest = _check_latest_version()
+        if latest and latest != __version__:
+            col_notif, col_btn = st.columns([6, 1])
+            with col_notif:
+                st.info(
+                    f"🔔 Mise à jour disponible : **v{latest}**"
+                    f" (vous avez v{__version__}) — "
+                    f"[Voir les nouveautés](https://github.com/DizzzBoum/PendleAPYito/releases/latest)"
+                )
+            with col_btn:
+                if st.button("⬇ Mettre à jour", key="btn_update"):
+                    import subprocess
+                    result = subprocess.run(
+                        ["git", "pull"],
+                        capture_output=True,
+                        text=True,
+                        cwd=str(Path(__file__).resolve().parents[1]),
+                    )
+                    if result.returncode == 0:
+                        st.success("✅ Mis à jour — relance run.bat")
+                    else:
+                        st.error(f"Erreur git pull : {result.stderr}")
+    except Exception:
+        pass  # version.py absent ou GitHub injoignable → silencieux
 
     col_prix, col_rpc = st.columns([5, 2])
 
