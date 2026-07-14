@@ -17,11 +17,11 @@ Desk manuel pour analyser les opportunités [Pendle Finance](https://app.pendle.
 2. Lance `first_run.bat` (double-clic ou depuis un terminal). Il vérifie Python et Git, crée l'environnement virtuel `.venv` et installe les dépendances.
 3. si git est a intaller :
    
-   a -Éditeur → choisir Notepad screen1
+   a. Éditeur → choisir " use Notepad "
    
    <img width="593" height="457" alt="image" src="https://github.com/user-attachments/assets/12963e9e-c05f-44ae-a720-3a621ff332f2" />
    
-   b-  git pull behavior → choisir Fast-forward only
+   b.  git pull behavior → choisir " Fast-forward only "
    
    <img width="591" height="457" alt="image" src="https://github.com/user-attachments/assets/97d49eb8-4ec1-476c-842c-8a22816531bc" />
 
