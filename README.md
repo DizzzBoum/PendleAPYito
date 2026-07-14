@@ -16,18 +16,26 @@ Desk manuel pour analyser les opportunités [Pendle Finance](https://app.pendle.
    ```
 2. Lance `first_run.bat` (double-clic ou depuis un terminal). Il vérifie Python et Git, crée l'environnement virtuel `.venv` et installe les dépendances.
 3. Ouvre le fichier `.env` créé automatiquement (à partir de `.env.example`).
-4. Édite `.env` et remplis au moins tes clés RPC (voir section suivante).
-5. Lance `run.bat` pour démarrer l'application.
+4. Lance `run.bat` pour démarrer l'application.
 
 ## Configuration `.env`
 
-PAO a besoin d'endpoints RPC pour interroger les réseaux blockchain. La façon la plus simple d'en obtenir gratuitement :
+Le fichier `.env` est créé automatiquement par `first_run.bat` depuis `.env.example`.
+Il contient déjà des endpoints RPC publics gratuits — **aucune configuration obligatoire pour démarrer.**
 
-1. Crée un compte gratuit sur [alchemy.com](https://www.alchemy.com/).
-2. Pour chaque réseau que tu veux utiliser (Ethereum, Arbitrum, Base, Optimism, BNB, Monad, Plasma, Hyperliquid), crée une "app" Alchemy et copie l'URL RPC complète.
-3. Colle chaque URL dans la variable correspondante de `.env` (`RPC_ETHEREUM`, `RPC_ARBITRUM`, etc.).
+### Option A — Démarrage immédiat (endpoints publics)
+Rien à faire. Les RPC publics dans `.env.example` fonctionnent directement.
+Adapté pour découvrir PAO et analyser les marchés Pendle.
 
-Tu peux laisser vide un réseau que tu n'utilises pas. Les autres variables (`FEE_MAX_USD_PER_TX`, couleurs `UI_*`) ont des valeurs par défaut raisonnables si tu ne les remplis pas.
+### Option B — Endpoints Alchemy (recommandé pour un usage régulier)
+Les endpoints publics peuvent être lents ou instables.
+Pour plus de fiabilité :
+
+1. Crée un compte gratuit sur [alchemy.com](https://alchemy.com) (sans CB)
+2. Crée une "app" pour chaque réseau que tu veux utiliser
+3. Copie l'URL RPC complète dans la variable correspondante de `.env`
+
+Tu peux ne configurer qu'Ethereum et Arbitrum — ce sont les chaînes avec le plus de marchés Pendle.
 
 ## Lancement
 
