@@ -11,12 +11,19 @@ Desk manuel pour analyser les opportunités [Pendle Finance](https://app.pendle.
 
 1. Clone le dépôt :
    ```
-   git clone <url-du-repo>
+   git clone https://github.com/DizzzBoum/PendleAPYito
    cd PendleAPYitot
    ```
 2. Lance `first_run.bat` (double-clic ou depuis un terminal). Il vérifie Python et Git, crée l'environnement virtuel `.venv` et installe les dépendances.
-3. Ouvre le fichier `.env` créé automatiquement (à partir de `.env.example`).
-4. Lance `run.bat` pour démarrer l'application.
+3. si git est a intaller :
+   1 -Éditeur → choisir Notepad screen1
+   <img width="593" height="457" alt="image" src="https://github.com/user-attachments/assets/12963e9e-c05f-44ae-a720-3a621ff332f2" />
+   2-  git pull behavior → choisir Fast-forward only
+   <img width="591" height="457" alt="image" src="https://github.com/user-attachments/assets/97d49eb8-4ec1-476c-842c-8a22816531bc" />
+
+   Tout le reste : Next Next Next.
+4. Ouvre le fichier `.env` créé automatiquement (à partir de `.env.example`).
+5. Lance `run.bat` pour démarrer l'application.
 
 ## Configuration `.env`
 
@@ -35,7 +42,6 @@ Pour plus de fiabilité :
 2. Crée une "app" pour chaque réseau que tu veux utiliser
 3. Copie l'URL RPC complète dans la variable correspondante de `.env`
 
-Tu peux ne configurer qu'Ethereum et Arbitrum — ce sont les chaînes avec le plus de marchés Pendle.
 
 ## Lancement
 
