@@ -65,7 +65,7 @@ PAO est un **desk manuel**. Aucune transaction automatique n'est effectuée. L'e
 
 ## Soutenir le projet
 
-PAO est gratuit et open source.  
+PendleAPYito (PAO) est gratuit et open source.  
 Si il t'est utile, tu peux soutenir le développement :
 
 **Adresse wallet** (Ethereum, Base, Arbitrum) :  
