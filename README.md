@@ -42,7 +42,7 @@ Adapté pour découvrir PAO et analyser les marchés Pendle.
 Les endpoints publics peuvent être lents ou instables.
 Pour plus de fiabilité :
 
-1. Crée un compte gratuit sur [alchemy.com](https://alchemy.com) (sans CB)
+1. Crée un compte gratuit sur [alchemy.com](https://alchemy.com) (sans CB, no parrainage)
 2. Crée une "app" pour chaque réseau que tu veux utiliser
 3. Copie l'URL RPC complète dans la variable correspondante de `.env`
 
@@ -62,3 +62,13 @@ Certaines fonctionnalités (prix temps réel, estimation de gas, validation de t
 ## Note importante
 
 PAO est un **desk manuel**. Aucune transaction automatique n'est effectuée. L'exécution se fait manuellement sur [app.pendle.finance](https://app.pendle.finance) via un deeplink généré par l'application.
+
+## Soutenir le projet
+
+PAO est gratuit et open source.  
+Si il t'est utile, tu peux soutenir le développement :
+
+**Adresse wallet** (Ethereum, Base, Arbitrum) :  
+`0x9602Ac4E681D11Ff5dcA4a076BfeEFBb09e2fFbD`
+
+Tout token ERC-20 accepté sur ces réseaux. Merci ! 🙏
