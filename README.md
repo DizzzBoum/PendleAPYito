@@ -2,66 +2,68 @@
 
 Desk manuel pour analyser les opportunités [Pendle Finance](https://app.pendle.finance) : scan des marchés PT/LP, comparaison d'APY, et deeplinks vers l'exécution manuelle sur l'app officielle Pendle.
 
-## Prérequis
+## PRÉREQUIS (à installer une seule fois)
 
-- Python 3.11 ou supérieur
-- Git
+1. Python 3.11+
+   → https://www.python.org/downloads/
+   ⚠️ Coche bien "Add Python to PATH" lors de l'installation
 
-## Installation
+2. Git for Windows
+   → https://git-scm.com/download/win
+   Pendant l'installation, 2 écrans à modifier :
+   - Éditeur : choisir "Use Notepad as Git's default editor"
+     
+      <img width="593" height="457" alt="image" src="https://github.com/user-attachments/assets/12963e9e-c05f-44ae-a720-3a621ff332f2" />
+      
+   - git pull behavior : choisir "Fast-forward only"
+  
+      <img width="591" height="457" alt="image" src="https://github.com/user-attachments/assets/97d49eb8-4ec1-476c-842c-8a22816531bc" />
+      
+   Tout le reste : Next jusqu'à la fin.
 
-1. Clone le dépôt :
-   ```
+───────────────────────────────────────
+
+## INSTALLATION PAO
+
+Ouvre un terminal Windows (CMD ou PowerShell) et tape :
+
    git clone https://github.com/DizzzBoum/PendleAPYito
-   cd PendleAPYitot
-   ```
-2. Lance `first_run.bat` (double-clic ou depuis un terminal). Il vérifie Python et Git, crée l'environnement virtuel `.venv` et installe les dépendances.
-3. si git est a intaller :
-   
-   a. Éditeur → choisir " use Notepad "
-   
-   <img width="593" height="457" alt="image" src="https://github.com/user-attachments/assets/12963e9e-c05f-44ae-a720-3a621ff332f2" />
-   
-   b.  git pull behavior → choisir " Fast-forward only "
-   
-   <img width="591" height="457" alt="image" src="https://github.com/user-attachments/assets/97d49eb8-4ec1-476c-842c-8a22816531bc" />
 
-   Tout le reste : Next Next Next.
-4. Ouvre le fichier `.env` créé automatiquement (à partir de `.env.example`).
-5. Lance `run.bat` pour démarrer l'application.
+Puis entre dans le dossier :
 
-## Configuration `.env`
+   cd PendleAPYito
 
-Le fichier `.env` est créé automatiquement par `first_run.bat` depuis `.env.example`.
-Il contient déjà des endpoints RPC publics gratuits — **aucune configuration obligatoire pour démarrer.**
+Double-clique sur first_run.bat
+→ Il installe tout automatiquement (venv, dépendances, .env)
 
-### Option A — Démarrage immédiat (endpoints publics)
-Rien à faire. Les RPC publics dans `.env.example` fonctionnent directement.
-Adapté pour découvrir PAO et analyser les marchés Pendle.
+───────────────────────────────────────
 
-### Option B — Endpoints Alchemy (recommandé pour un usage régulier)
-Les endpoints publics peuvent être lents ou instables.
-Pour plus de fiabilité :
+## CONFIGURATION
 
-1. Crée un compte gratuit sur [alchemy.com](https://alchemy.com) (sans CB, no parrainage)
-2. Crée une "app" pour chaque réseau que tu veux utiliser
-3. Copie l'URL RPC complète dans la variable correspondante de `.env`
+Ouvre le fichier .env avec un éditeur de texte.
+Les endpoints RPC publics sont déjà remplis — 
+tu peux démarrer sans rien changer.
 
+Optionnel : remplace les RPC publics par tes propres 
+URLs Alchemy (gratuit) pour plus de fiabilité.
+sur [alchemy.com](https://alchemy.com) (sans CB, no parrainage)
 
-## Lancement
+───────────────────────────────────────
 
-Double-clique sur `run.bat` (ou lance-le depuis un terminal). L'application Streamlit s'ouvre dans ton navigateur.
+## LANCEMENT
 
-## Mise à jour
+Double-clique sur run.bat
+→ L'application s'ouvre dans ton navigateur sur localhost:8501
 
-Un bouton de mise à jour est disponible directement dans l'application — la mise à jour se fait automatiquement depuis l'interface, pas besoin de manipulation manuelle.
+───────────────────────────────────────
 
-## Limitations connues
+## MISES À JOUR
 
-Certaines fonctionnalités (prix temps réel, estimation de gas, validation de transaction) reposent sur des kits internes développés en local par le mainteneur, non publiés publiquement. Sans eux, l'application fonctionne normalement mais avec ces fonctionnalités désactivées.
+Un bandeau apparaît dans l'app quand une mise à jour 
+est disponible. Clique sur "⬇ Mettre à jour" — 
+c'est automatique, pas besoin de terminal.
 
-## Note importante
-
-PAO est un **desk manuel**. Aucune transaction automatique n'est effectuée. L'exécution se fait manuellement sur [app.pendle.finance](https://app.pendle.finance) via un deeplink généré par l'application.
+───────────────────────────────────────
 
 ## Soutenir le projet
 
@@ -72,3 +74,12 @@ Si il t'est utile, tu peux soutenir le développement :
 `0x9602Ac4E681D11Ff5dcA4a076BfeEFBb09e2fFbD`
 
 Tout token ERC-20 accepté sur ces réseaux. Merci ! 🙏
+
+## Limitations connues
+
+Certaines fonctionnalités (prix temps réel, estimation de gas, validation de transaction) reposent sur des kits internes développés en local par le mainteneur, non publiés publiquement. Sans eux, l'application fonctionne normalement mais avec ces fonctionnalités désactivées.
+
+## Note importante
+
+PAO est un **desk manuel**. Aucune transaction automatique n'est effectuée. L'exécution se fait manuellement sur [app.pendle.finance](https://app.pendle.finance) via un deeplink généré par l'application.
+
