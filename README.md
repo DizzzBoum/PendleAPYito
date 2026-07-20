@@ -1,37 +1,51 @@
-# PendleAPYito (PAO)
+# Installation de PendleAPYito (PAO)
 
 Desk manuel pour analyser les opportunités [Pendle Finance](https://app.pendle.finance) : scan des marchés PT/LP, comparaison d'APY, et deeplinks vers l'exécution manuelle sur l'app officielle Pendle.
 
-## Prérequis
+## Prérequis (à installer une seule fois)
 
-- Python 3.11 ou supérieur
-- Git
+1. Python 3.11+
+   → https://www.python.org/downloads/
+   ⚠️ Coche bien "Add Python to PATH" lors de l'installation
+
+2. Git for Windows
+   → https://git-scm.com/download/win
+   Pendant l'installation, 2 écrans à modifier :
+   - Éditeur : choisir "Use Notepad as Git's default editor"
+   - git pull behavior : choisir "Fast-forward only"
+   Tout le reste : Next jusqu'à la fin.
+
 
 ## Installation
 
-1. Clone le dépôt :
-   ```
-   git clone <url-du-repo>
-   cd PendleAPYitot
-   ```
-2. Lance `first_run.bat` (double-clic ou depuis un terminal). Il vérifie Python et Git, crée l'environnement virtuel `.venv` et installe les dépendances.
-3. Ouvre le fichier `.env` créé automatiquement (à partir de `.env.example`).
-4. Édite `.env` et remplis au moins tes clés RPC (voir section suivante).
-5. Lance `run.bat` pour démarrer l'application.
+1. Ouvre un terminal Windows (CMD ou PowerShell) et tape :
+
+   git clone https://github.com/DizzzBoum/PendleAPYito
+
+2. Puis entre dans le dossier :
+
+   cd PendleAPYito
+
+3. Dans le new dossier créé PendleAPYito 
+   Double-clique sur first_run.bat
+→ Il installe tout automatiquement (venv, dépendances, .env).
+
+   streamlit peut demander un email a l'installation pour la premiere fois. Appuyer sur ENTER directement, sauf si vous voulez le mettre pour des news de Streamlit.
 
 ## Configuration `.env`
 
-PAO a besoin d'endpoints RPC pour interroger les réseaux blockchain. La façon la plus simple d'en obtenir gratuitement :
+Tu peux démarrer sans rien changer.
+Les endpoints RPC publics sont déjà remplis
 
-1. Crée un compte gratuit sur [alchemy.com](https://www.alchemy.com/).
-2. Pour chaque réseau que tu veux utiliser (Ethereum, Arbitrum, Base, Optimism, BNB, Monad, Plasma, Hyperliquid), crée une "app" Alchemy et copie l'URL RPC complète.
-3. Colle chaque URL dans la variable correspondante de `.env` (`RPC_ETHEREUM`, `RPC_ARBITRUM`, etc.).
-
-Tu peux laisser vide un réseau que tu n'utilises pas. Les autres variables (`FEE_MAX_USD_PER_TX`, couleurs `UI_*`) ont des valeurs par défaut raisonnables si tu ne les remplis pas.
+Optionnel : 
+Ouvre le fichier .env avec un éditeur de texte.
+remplace les RPC publics par tes propres
+URLs Alchemy (alchemy.com, gratuit) pour plus de fiabilité.
 
 ## Lancement
 
-Double-clique sur `run.bat` (ou lance-le depuis un terminal). L'application Streamlit s'ouvre dans ton navigateur.
+Double-clique sur run.bat
+→ L'application s'ouvre dans ton navigateur sur localhost:8501
 
 ## Mise à jour
 
@@ -41,6 +55,9 @@ Un bouton de mise à jour est disponible directement dans l'application — la m
 
 Certaines fonctionnalités (prix temps réel, estimation de gas, validation de transaction) reposent sur des kits internes développés en local par le mainteneur, non publiés publiquement. Sans eux, l'application fonctionne normalement mais avec ces fonctionnalités désactivées.
 
-## Note importante
+## Support
 
-PAO est un **desk manuel**. Aucune transaction automatique n'est effectuée. L'exécution se fait manuellement sur [app.pendle.finance](https://app.pendle.finance) via un deeplink généré par l'application.
+PendlAPYito est bien openSource/Gratuit
+
+Wallet (dons) — Ethereum / Base / Arbitrum :
+0x9602Ac4E681D11Ff5dcA4a076BfeEFBb09e2fFbD
