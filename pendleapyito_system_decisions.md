@@ -400,3 +400,111 @@ Snippet de diagnostic (`from adapters.kits_bridge import ...`) avait été accid
 ### Remarque sur FETCH_CHAINS vs Refresh ALL
 - FETCH_CHAINS reste figé à 8 chaînes (Ethereum, Base, BNB, Arbitrum, Optimism, HyperEVM, Monad, Plasma). Le bouton "Refresh markets" ciblé ne couvre pas Sonic, Berachain ni Mantle.
 - Le "Refresh ALL" cross-chain les récupère automatiquement sans chainId — comportement accepté, pas de besoin de refresh individuel sur ces 3 nouvelles chaînes pour l'instant.
+
+## 2026-07-13 — Distribution GitHub + système de mise à jour
+
+### Repo GitHub créé
+- URL publique : https://github.com/DizzzBoum/PendleAPYito
+- Premier commit : b4c5f90 — 28 fichiers, PAO v0.1.0
+- Release GitHub publiée : v0.1.0 "PAO v0.1.0 — Premier release public"
+- Tag : v0.1.0, branche : main, label : Latest
+
+### Fichiers de distribution créés (Claude Code)
+- `.gitignore` : exclut .env, .venv/, __pycache__/, data/*.json, tx_logs/,
+  .idea/, *.py~, .claude/, ANALYSE_*.md
+- `data/.gitkeep` : placeholder pour dossier data/ dans le repo
+- `.env.example` : template complet avec RPC publics pré-remplis + couleurs thème
+- `version.py` : `__version__ = "0.1.0"`, `__app_name__ = "PendleAPYito"`
+- `first_run.bat` : installation Windows (vérifie Python + Git, crée venv,
+  pip install, copie .env.example → .env)
+- `run.bat` : lancement Windows (active venv, streamlit run app.py)
+- `README.md` : documentation utilisateur en français
+
+### requirements.txt corrigé
+- Ré-encodé UTF-16 → UTF-8 (aurait fait échouer pip install chez les amis)
+- 4 lignes `-e c:\users\nom_utilisateur\...` commentées (chemins locaux non portables)
+- Les kits defi (defi_price_kit, defi_rpc_kit, defi_fee_kit, transaction_kit)
+  ne sont PAS sur PyPI — installés localement via pip install -e uniquement
+  sur la machine du mainteneur. Sans eux, PAO fonctionne en mode dégradé
+  (pas de bandeau prix, pas de gas estimé) — comportement voulu, silencieux.
+
+### RPC publics dans .env.example
+Endpoints publics gratuits pré-remplis — aucune configuration obligatoire
+pour démarrer PAO :
+- RPC_ETHEREUM=https://eth.llamarpc.com
+- RPC_ARBITRUM=https://arb1.arbitrum.io/rpc
+- RPC_BASE=https://mainnet.base.org
+- RPC_OPT=https://mainnet.optimism.io
+- RPC_BNB=https://bsc-dataseed.binance.org/
+- RPC_MONAD=https://rpc.monad.xyz
+- RPC_PLASMA=https://rpc.plasma.io
+- RPC_HYPERLIQUID=https://rpc.hyperliquid.xyz/evm
+Alchemy reste recommandé pour fiabilité — optionnel, documenté dans README.
+
+### Système de mise à jour in-app (cockpit_bar.py)
+- `_check_latest_version()` : appel `api.github.com/repos/DizzzBoum/PendleAPYito/releases/latest`
+  caché 1h (`@st.cache_data(ttl=3600)`)
+- Bandeau `st.info` si version distante > `__version__` local
+- Bouton "⬇ Mettre à jour" : `subprocess.run(["git", "pull"])` depuis la racine du projet
+- Silencieux si GitHub injoignable ou `version.py` absent
+- Fonctionne uniquement si le projet a été installé via `git clone`
+  (pas via zip)
+
+### Workflow de publication d'une nouvelle version
+1. Modifier `version.py` → incrémenter `__version__`
+2. `git add . && git commit -m "feat: ..." && git push`
+3. GitHub → Releases → Draft new release → tag vX.Y.Z → Publish
+4. Le bandeau apparaît automatiquement chez les utilisateurs
+
+### Monétisation — décision
+- Referral Pendle : inexistant (confirmé doc officielle + recherche)
+- Fee sur transactions : impossible en V0 deeplink, complexe et réglementé en V1
+- Solution retenue : tip volontaire (adresse wallet + Ko-fi dans README)
+  Non implémenté dans l'UI pour l'instant
+
+## 2026-07-15 — Distribution amis + corrections post-release
+
+### requirements.txt — corruption UTF-16 résolue
+Fichier corrompu (NUL bytes) suite à double conversion d'encodage par Claude Code.
+Résolution : pip freeze > requirements_new.txt depuis le venv, suppression manuelle
+des 6 lignes -e locales (defi_fee_kit, defi_price_kit, defi_rpc_kit), renommage.
+Règle établie : toujours régénérer via pip freeze en cas de doute sur l'encodage.
+Les 3 kits defi ne sont PAS dans requirements.txt — non distribuables publiquement.
+PAO fonctionne en mode dégradé sans eux (silencieux via HAS_PRICE_KIT etc.).
+
+### Conflit Git résolu (fast-forward divergence)
+Cause : README modifié directement sur GitHub + commits locaux simultanés.
+Résolution : git fetch origin → git reset --soft origin/main → git push.
+Note : "Fast-forward only" configuré lors de l'install Git bloque les merges
+automatiques — préférer modifier les fichiers en local puis pusher plutôt
+que d'éditer directement sur GitHub.
+
+### Endpoints RPC publics validés
+Pré-remplis dans .env.example — aucune configuration obligatoire pour démarrer :
+RPC_ETHEREUM=https://eth.llamarpc.com
+RPC_ARBITRUM=https://arb1.arbitrum.io/rpc
+RPC_BASE=https://mainnet.base.org
+RPC_OPT=https://mainnet.optimism.io
+RPC_BNB=https://bsc-dataseed.binance.org/
+RPC_MONAD=https://rpc.monad.xyz
+RPC_PLASMA=https://rpc.plasma.io
+RPC_HYPERLIQUID=https://rpc.hyperliquid.xyz/evm
+Alchemy reste recommandé pour fiabilité — optionnel, documenté dans README.
+
+### Bug installation premier utilisateur
+Streamlit non installé chez le premier ami testeur.
+Cause : requirements.txt corrompu → pip install silencieusement incomplet.
+Fix immédiat : .venv\Scripts\pip install streamlit dans CMD.
+Fix permanent : requirements.txt régénéré proprement et pushé.
+
+### Procédure mise à jour pour les amis (sans PyCharm)
+Deux méthodes selon le contexte :
+1. Bouton "⬇ Mettre à jour" dans PAO (git pull automatique) — recommandé
+2. Clic droit dans le dossier PendleAPYito → "Open Git Bash here" → git pull
+→ relancer run.bat dans les deux cas.
+Pas besoin de compte GitHub pour git pull sur repo public.
+
+### Monétisation — adresse wallet ajoutée au README
+Adresse : 0x9602Ac4E681D11Ff5dcA4a076BfeEFBb09e2fFbD
+Réseaux : Ethereum, Base, Arbitrum.
+Tout token ERC-20 accepté. Pas de programme referral Pendle (inexistant).

@@ -1,0 +1,62 @@
+Installation de PendleAPYito (PAO)
+
+PRÉREQUIS (à installer une seule fois)
+
+1. Python 3.11+
+   → https://www.python.org/downloads/
+   ⚠️ Coche bien "Add Python to PATH" lors de l'installation
+
+2. Git for Windows
+   → https://git-scm.com/download/win
+   Pendant l'installation, 2 écrans à modifier :
+   - Éditeur : choisir "Use Notepad as Git's default editor"
+   - git pull behavior : choisir "Fast-forward only"
+   Tout le reste : Next jusqu'à la fin.
+
+───────────────────────────────────────
+
+INSTALLATION PAO
+
+Ouvre un terminal Windows (CMD ou PowerShell) et tape :
+
+   git clone https://github.com/DizzzBoum/PendleAPYito
+
+Puis entre dans le dossier :
+
+   cd PendleAPYito
+
+Double-clique sur first_run.bat
+→ Il installe tout automatiquement (venv, dépendances, .env)
+
+───────────────────────────────────────
+
+CONFIGURATION
+
+Ouvre le fichier .env avec un éditeur de texte.
+Les endpoints RPC publics sont déjà remplis — 
+tu peux démarrer sans rien changer.
+
+Optionnel : remplace les RPC publics par tes propres 
+URLs Alchemy (alchemy.com, gratuit) pour plus de fiabilité.
+
+───────────────────────────────────────
+
+LANCEMENT
+
+Double-clique sur run.bat
+→ L'application s'ouvre dans ton navigateur sur localhost:8501
+
+───────────────────────────────────────
+
+MISES À JOUR
+
+Un bandeau apparaît dans l'app quand une mise à jour 
+est disponible. Clique sur "⬇ Mettre à jour" — 
+c'est automatique, pas besoin de terminal.
+
+───────────────────────────────────────
+
+SUPPORT
+
+Wallet (dons) — Ethereum / Base / Arbitrum :
+0x9602Ac4E681D11Ff5dcA4a076BfeEFBb09e2fFbD

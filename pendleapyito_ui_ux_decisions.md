@@ -302,3 +302,52 @@ Prix cohérents avec les trackers de marché (Ethereum Gas Tracker, prix CEX). T
 ### Remarque sur FETCH_CHAINS vs Refresh ALL
 - FETCH_CHAINS reste figé à 8 chaînes (Ethereum, Base, BNB, Arbitrum, Optimism, HyperEVM, Monad, Plasma). Le bouton "Refresh markets" ciblé ne couvre pas Sonic, Berachain ni Mantle.
 - Le "Refresh ALL" cross-chain les récupère automatiquement sans chainId — comportement accepté, pas de besoin de refresh individuel sur ces 3 nouvelles chaînes pour l'instant.
+
+## 2026-07-13 — Bandeau mise à jour + README distribution
+
+### Bandeau mise à jour dans cockpit_bar.py
+Affiché uniquement quand version GitHub > version locale.
+Position : entre `_inject_local_styles()` et `st.columns([5, 2])` du cockpit.
+Layout : `st.columns([6, 1])` — notif à gauche, bouton à droite.
+- `st.info` avec lien "Voir les nouveautés" → GitHub releases/latest
+- Bouton "⬇ Mettre à jour" → git pull automatique + message résultat
+- Silencieux si GitHub injoignable (try/except global)
+
+### README — section Configuration .env
+Reformulée pour ne pas décourager les utilisateurs non techniques :
+- RPC publics par défaut = aucune configuration obligatoire
+- Alchemy = option recommandée pour usage régulier, pas prérequis
+- Suppression de l'instruction "créer une app Alchemy" comme étape obligatoire
+
+### Installation Git for Windows — 2 réglages à noter dans README
+Les seuls écrans où l'utilisateur doit changer le défaut :
+1. Éditeur : choisir "Use Notepad as Git's default editor"
+2. git pull behavior : choisir "Fast-forward only"
+Tout le reste : Next jusqu'à la fin.
+
+## 2026-07-15 — README refondu pour distribution
+
+### README remplacé par guide installation facile
+Ancien README : orienté développeur, Alchemy obligatoire, trop technique.
+Nouveau README : orienté utilisateur final, RPC publics par défaut,
+Alchemy en option, procédure en 5 étapes claires.
+
+### Section Configuration .env reformulée
+- RPC publics = démarrage immédiat, aucune config obligatoire
+- Alchemy = Option B, recommandé pour usage régulier uniquement
+- Suppression de l'instruction "créer une app Alchemy" comme étape obligatoire
+
+### Section Mise à jour dans README
+Procédure explicite pour les amis sans PyCharm :
+clic droit → "Open Git Bash here" → git pull → relancer run.bat
+Mention du bouton in-app comme méthode principale.
+
+### Guide installation Git for Windows — 2 écrans clés documentés
+Captures d'écran prévues dans README pour les 2 seuls réglages à changer :
+1. Éditeur : "Use Notepad as Git's default editor"
+2. git pull behavior : "Fast-forward only"
+Tout le reste : Next jusqu'à la fin.
+
+### Adresse wallet dans README
+Section "Soutenir le projet" ajoutée en fin de README.
+Adresse wallet en bloc code pour faciliter le copier-coller.
